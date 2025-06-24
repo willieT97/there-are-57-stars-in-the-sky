@@ -1,0 +1,272 @@
+/* Starry night background */
+body {
+  position: relative;
+  background-color: #000000;
+  color: #33aaff;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 40px;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow:
+    10vw 15vh rgba(255, 255, 255, 0.7),
+    20vw 30vh rgba(255, 255, 255, 0.5),
+    35vw 40vh rgba(255, 255, 255, 0.6),
+    50vw 20vh rgba(255, 255, 255, 0.7),
+    60vw 50vh rgba(255, 255, 255, 0.4),
+    5vw 80vh rgba(255, 255, 255, 0.6),
+    12vw 65vh rgba(255, 255, 255, 0.8),
+    75vw 10vh rgba(255, 255, 255, 0.5),
+    85vw 70vh rgba(255, 255, 255, 0.7),
+    45vw 60vh rgba(255, 255, 255, 0.4),
+    25vw 85vh rgba(255, 255, 255, 0.6),
+    55vw 75vh rgba(255, 255, 255, 0.7),
+    65vw 30vh rgba(255, 255, 255, 0.8),
+    30vw 25vh rgba(255, 255, 255, 0.5),
+    15vw 10vh rgba(255, 255, 255, 0.6),
+    40vw 45vh rgba(255, 255, 255, 0.7),
+    70vw 35vh rgba(255, 255, 255, 0.8),
+    80vw 55vh rgba(255, 255, 255, 0.5),
+    95vw 20vh rgba(255, 255, 255, 0.6),
+    10vw 70vh rgba(255, 255, 255, 0.4),
+    22vw 80vh rgba(255, 255, 255, 0.7),
+    37vw 55vh rgba(255, 255, 255, 0.5),
+    50vw 40vh rgba(255, 255, 255, 0.6),
+    62vw 65vh rgba(255, 255, 255, 0.4),
+    75vw 80vh rgba(255, 255, 255, 0.7),
+    88vw 15vh rgba(255, 255, 255, 0.6),
+    95vw 60vh rgba(255, 255, 255, 0.8),
+    5vw 30vh rgba(255, 255, 255, 0.5),
+    18vw 45vh rgba(255, 255, 255, 0.7),
+    33vw 70vh rgba(255, 255, 255, 0.6),
+    48vw 25vh rgba(255, 255, 255, 0.5),
+    59vw 50vh rgba(255, 255, 255, 0.7),
+    71vw 10vh rgba(255, 255, 255, 0.8),
+    83vw 40vh rgba(255, 255, 255, 0.6),
+    91vw 75vh rgba(255, 255, 255, 0.5),
+    3vw 55vh rgba(255, 255, 255, 0.7),
+    12vw 15vh rgba(255, 255, 255, 0.8),
+    26vw 35vh rgba(255, 255, 255, 0.5),
+    39vw 80vh rgba(255, 255, 255, 0.7),
+    53vw 60vh rgba(255, 255, 255, 0.6),
+    67vw 45vh rgba(255, 255, 255, 0.8),
+    79vw 30vh rgba(255, 255, 255, 0.5),
+    90vw 55vh rgba(255, 255, 255, 0.7),
+    8vw 20vh rgba(255, 255, 255, 0.6),
+    21vw 65vh rgba(255, 255, 255, 0.7),
+    34vw 10vh rgba(255, 255, 255, 0.8),
+    47vw 75vh rgba(255, 255, 255, 0.5),
+    58vw 25vh rgba(255, 255, 255, 0.7),
+    72vw 50vh rgba(255, 255, 255, 0.6),
+    84vw 40vh rgba(255, 255, 255, 0.8),
+    93vw 65vh rgba(255, 255, 255, 0.5),
+    6vw 35vh rgba(255, 255, 255, 0.7),
+    19vw 55vh rgba(255, 255, 255, 0.6),
+    31vw 70vh rgba(255, 255, 255, 0.8),
+    44vw 15vh rgba(255, 255, 255, 0.5),
+    56vw 80vh rgba(255, 255, 255, 0.7),
+    68vw 60vh rgba(255, 255, 255, 0.6),
+    81vw 30vh rgba(255, 255, 255, 0.8),
+    94vw 45vh rgba(255, 255, 255, 0.5);
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+
+
+header, nav, section {
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  color: #33aaff;
+  text-shadow: 0 0 10px #33ccff;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin: 0;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.typed-text {
+  display: inline-block;
+  animation: typing 4s steps(35, end) forwards;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 35ch;
+  font-size: 2.5rem; /* 👈 Make this as large as you want */
+  text-shadow: 0 0 10px #33ccff; /* Optional glow */
+}
+
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 35ch; }
+}
+
+.caret {
+  display: inline-block;
+  width: 0.12em;
+  height: 2.5em;
+  background: #33aaff;
+  margin-left: 2px;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.7em; /* Adjust up or down */
+  animation: blink-caret 0.8s steps(1, end) infinite;
+  /* Thin blinking caret */
+}
+
+@keyframes blink-caret {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+
+
+.blinking-dash-line {
+  width: 100%;
+  border-bottom: 2px dashed #0099dd;
+  animation: blink-line 1s step-start infinite;
+  margin-top: 8px;
+}
+
+@keyframes blink-line {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+a {
+  color: #0099dd;
+  font-weight: 700;
+}
+
+a:hover {
+  color: #0077aa;
+}
+
+nav a {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+article {
+  margin-top: 40px;
+  border-left: 3px solid #0099dd;
+  padding-left: 20px;
+}
+
+header {
+  margin-bottom: 30px;
+}
+
+section {
+  margin-top: 20px;
+}
+
+footer {
+  margin-top: 40px;
+  padding: 20px;
+  background: #000014;
+  color: #33aaff;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: inset 0 0 10px #0077ff;
+  border-radius: 8px;
+}
+
+.terminal-comments {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #001022;
+  border: 2px solid #33ccff;
+  border-radius: 6px;
+  box-shadow: 0 0 20px #33ccff77;
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.terminal-title {
+  color: #33ccff;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.terminal-input {
+  flex-grow: 1;
+  background: #000011;
+  border: 1px solid #33ccff;
+  color: #33ccff;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px;
+  border-radius: 4px;
+  resize: vertical;
+  box-shadow: inset 0 0 5px #33ccffaa;
+  min-height: 70px;
+}
+
+.terminal-input::placeholder {
+  color: #33ccffaa;
+}
+
+.terminal-submit {
+  background: #33ccff;
+  border: none;
+  color: #001022;
+  font-weight: 900;
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  height: fit-content;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.terminal-submit:hover {
+  background: #0099dd;
+}
+
+.terminal-output {
+  margin-top: 12px;
+  max-height: 150px;
+  overflow-y: auto;
+  background: #000011;
+  border: 1px solid #33ccff;
+  border-radius: 4px;
+  padding: 8px;
+  white-space: pre-wrap;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: #66ddff;
+  box-shadow: inset 0 0 8px #33ccff99;
+  max-width: 600px;
+  margin: 12px auto 0 auto;
+}
