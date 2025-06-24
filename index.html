@@ -3,55 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Welcome to My Website</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 0 20px;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    h1 {
-      color: #2c3e50;
-    }
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-    }
-    a {
-      display: inline-block;
-      margin-top: 20px;
-      font-size: 18px;
-      color: #2980b9;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <title>There Are 57 Stars In The Sky...</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Welcome to My Art, Music & Blog</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+    <span class="typed-text">There Are 57 Stars In The Sky...</span><span class="caret"></span>
+    <div class="blinking-dash-line"></div>
   </header>
 
-  <section>
-    <p>
-      Hi! This is my personal website where I share my art, music, blog posts, and other creative projects.
-      Feel free to explore and get to know my work.
-    </p>
-    <p>
-      Stay tuned for updates and new content — and thanks for visiting!
-    </p>
+  <main>
+    <p>Welcome to my website where I share art, music, and thoughts.</p>
+  </main>
 
-    <!-- Link to blog page -->
-    <a href="blog.html">→ Visit My Blog</a>
-  </section>
+  <footer>
+    <div class="terminal-comments">
+      <textarea
+        class="terminal-input"
+        placeholder="Type your comment here..."
+        rows="3"
+      ></textarea>
+      <button class="terminal-submit" onclick="submitComment()">Submit</button>
+    </div>
+  </footer>
+
+  <script>
+    function submitComment() {
+      const input = document.querySelector('.terminal-input');
+      const output = document.getElementById('comment-output');
+      const comment = input.value.trim();
+
+      if (!comment) {
+        alert('Please enter a comment.');
+        return;
+      }
+
+      const time = new Date().toLocaleTimeString();
+      output.textContent += `[${time}] > ${comment}\n`;
+
+      input.value = '';
+      output.scrollTop = output.scrollHeight;
+    }
+  </script>
 </body>
 </html>
