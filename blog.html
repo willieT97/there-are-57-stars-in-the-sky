@@ -3,55 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Blog</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 0 20px;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-    h1 {
-      color: #2c3e50;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    article {
-      margin-bottom: 40px;
-    }
-    article h2 {
-      color: #34495e;
-      margin-bottom: 10px;
-    }
-    article p {
-      line-height: 1.6;
-    }
-    nav a {
-      display: inline-block;
-      margin-bottom: 30px;
-      color: #2980b9;
-      text-decoration: none;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <title>Blog - Neon Hacker Site</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav>
-    <a href="index.html">← Back to Home</a>
-  </nav>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+    </nav>
+    <span class="typed-text">Blog...</span>
+    <div class="blinking-dash-line"></div>
+  </header>
 
-  <h1>My Blog</h1>
+  <section id="blog-container">
+   
+  </section>
 
-  <article>
-    <h2>Welcome to my blog!</h2>
-    <p>This is where I will share thoughts, updates, and stories about my art and music.</p>
-  </article>
+  <pre id="comment-output"></pre>
 
-  <!-- Add more articles here -->
+  <footer>
+    <div class="terminal-comments">
+      <textarea
+        class="terminal-input"
+        placeholder="Type your comment here..."
+        rows="3"
+      ></textarea>
+      <button class="terminal-submit" onclick="submitComment()">Submit</button>
+    </div>
+  </footer>
 
+    <script>
+  fetch('posts.json')
+    .then(response => response.json())
+    .then(posts => {
+      const container = document.getElementById('blog-container');
+      posts.forEach(post => {
+        const article = document.createElement('article');
+        article.innerHTML = `
+          <h2><a href="${post.filename}">${post.title}</a></h2>
+          <p>${post.summary} <a href="${post.filename}">Read more</a></p>
+        `;
+        container.appendChild(article);
+      });
+    })
+    .catch(error => console.error('Error loading posts:', error));
+    </script>
+
+
+  <script>
+    function submitComment() {
+      const input = document.querySelector('.terminal-input');
+      const output = document.getElementById('comment-output');
+      const comment = input.value.trim();
+
+      if (!comment) {
+        alert('Please enter a comment.');
+        return;
+      }
+
+      const time = new Date().toLocaleTimeString();
+      output.textContent += `[${time}] > ${comment}\n`;
+
+      input.value = '';
+      output.scrollTop = output.scrollHeight;
+    }
+  </script>
 </body>
 </html>
