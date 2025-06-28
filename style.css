@@ -9,6 +9,10 @@ body {
   line-height: 1.6;
   padding: 40px;
   overflow-x: hidden;
+  min-height: 100vh; /* ensure body fills screen */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 body::before {
@@ -19,70 +23,98 @@ body::before {
   width: 2px;
   height: 2px;
   background: transparent;
+  --x-offset: 0px;
+  --y-offset: 0px;
   box-shadow:
-    10vw 15vh rgba(255, 255, 255, 0.7),
-    20vw 30vh rgba(255, 255, 255, 0.5),
-    35vw 40vh rgba(255, 255, 255, 0.6),
-    50vw 20vh rgba(255, 255, 255, 0.7),
-    60vw 50vh rgba(255, 255, 255, 0.4),
-    5vw 80vh rgba(255, 255, 255, 0.6),
-    12vw 65vh rgba(255, 255, 255, 0.8),
-    75vw 10vh rgba(255, 255, 255, 0.5),
-    85vw 70vh rgba(255, 255, 255, 0.7),
-    45vw 60vh rgba(255, 255, 255, 0.4),
-    25vw 85vh rgba(255, 255, 255, 0.6),
-    55vw 75vh rgba(255, 255, 255, 0.7),
-    65vw 30vh rgba(255, 255, 255, 0.8),
-    30vw 25vh rgba(255, 255, 255, 0.5),
-    15vw 10vh rgba(255, 255, 255, 0.6),
-    40vw 45vh rgba(255, 255, 255, 0.7),
-    70vw 35vh rgba(255, 255, 255, 0.8),
-    80vw 55vh rgba(255, 255, 255, 0.5),
-    95vw 20vh rgba(255, 255, 255, 0.6),
-    10vw 70vh rgba(255, 255, 255, 0.4),
-    22vw 80vh rgba(255, 255, 255, 0.7),
-    37vw 55vh rgba(255, 255, 255, 0.5),
-    50vw 40vh rgba(255, 255, 255, 0.6),
-    62vw 65vh rgba(255, 255, 255, 0.4),
-    75vw 80vh rgba(255, 255, 255, 0.7),
-    88vw 15vh rgba(255, 255, 255, 0.6),
-    95vw 60vh rgba(255, 255, 255, 0.8),
-    5vw 30vh rgba(255, 255, 255, 0.5),
-    18vw 45vh rgba(255, 255, 255, 0.7),
-    33vw 70vh rgba(255, 255, 255, 0.6),
-    48vw 25vh rgba(255, 255, 255, 0.5),
-    59vw 50vh rgba(255, 255, 255, 0.7),
-    71vw 10vh rgba(255, 255, 255, 0.8),
-    83vw 40vh rgba(255, 255, 255, 0.6),
-    91vw 75vh rgba(255, 255, 255, 0.5),
-    3vw 55vh rgba(255, 255, 255, 0.7),
-    12vw 15vh rgba(255, 255, 255, 0.8),
-    26vw 35vh rgba(255, 255, 255, 0.5),
-    39vw 80vh rgba(255, 255, 255, 0.7),
-    53vw 60vh rgba(255, 255, 255, 0.6),
-    67vw 45vh rgba(255, 255, 255, 0.8),
-    79vw 30vh rgba(255, 255, 255, 0.5),
-    90vw 55vh rgba(255, 255, 255, 0.7),
-    8vw 20vh rgba(255, 255, 255, 0.6),
-    21vw 65vh rgba(255, 255, 255, 0.7),
-    34vw 10vh rgba(255, 255, 255, 0.8),
-    47vw 75vh rgba(255, 255, 255, 0.5),
-    58vw 25vh rgba(255, 255, 255, 0.7),
-    72vw 50vh rgba(255, 255, 255, 0.6),
-    84vw 40vh rgba(255, 255, 255, 0.8),
-    93vw 65vh rgba(255, 255, 255, 0.5),
-    6vw 35vh rgba(255, 255, 255, 0.7),
-    19vw 55vh rgba(255, 255, 255, 0.6),
-    31vw 70vh rgba(255, 255, 255, 0.8),
-    44vw 15vh rgba(255, 255, 255, 0.5),
-    56vw 80vh rgba(255, 255, 255, 0.7),
-    68vw 60vh rgba(255, 255, 255, 0.6),
-    81vw 30vh rgba(255, 255, 255, 0.8),
-    94vw 45vh rgba(255, 255, 255, 0.5);
+    calc(10vw + var(--x-offset)) calc(15vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(20vw + var(--x-offset)) calc(30vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(35vw + var(--x-offset)) calc(40vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(50vw + var(--x-offset)) calc(20vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(60vw + var(--x-offset)) calc(50vh + var(--y-offset)) rgba(255, 255, 255, 0.4),
+    calc(5vw + var(--x-offset))  calc(80vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(12vw + var(--x-offset)) calc(65vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(75vw + var(--x-offset)) calc(10vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(85vw + var(--x-offset)) calc(70vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(45vw + var(--x-offset)) calc(60vh + var(--y-offset)) rgba(255, 255, 255, 0.4),
+    calc(25vw + var(--x-offset)) calc(85vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(55vw + var(--x-offset)) calc(75vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(65vw + var(--x-offset)) calc(30vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(30vw + var(--x-offset)) calc(25vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(15vw + var(--x-offset)) calc(10vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(40vw + var(--x-offset)) calc(45vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(70vw + var(--x-offset)) calc(35vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(80vw + var(--x-offset)) calc(55vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(95vw + var(--x-offset)) calc(20vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(10vw + var(--x-offset)) calc(70vh + var(--y-offset)) rgba(255, 255, 255, 0.4),
+    calc(22vw + var(--x-offset)) calc(80vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(37vw + var(--x-offset)) calc(55vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(50vw + var(--x-offset)) calc(40vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(62vw + var(--x-offset)) calc(65vh + var(--y-offset)) rgba(255, 255, 255, 0.4),
+    calc(75vw + var(--x-offset)) calc(80vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(88vw + var(--x-offset)) calc(15vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(95vw + var(--x-offset)) calc(60vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(5vw + var(--x-offset))  calc(30vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(18vw + var(--x-offset)) calc(45vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(33vw + var(--x-offset)) calc(70vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(48vw + var(--x-offset)) calc(25vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(59vw + var(--x-offset)) calc(50vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(71vw + var(--x-offset)) calc(10vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(83vw + var(--x-offset)) calc(40vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(91vw + var(--x-offset)) calc(75vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(3vw + var(--x-offset))  calc(55vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(12vw + var(--x-offset)) calc(15vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(26vw + var(--x-offset)) calc(35vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(39vw + var(--x-offset)) calc(80vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(53vw + var(--x-offset)) calc(60vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(67vw + var(--x-offset)) calc(45vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(79vw + var(--x-offset)) calc(30vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(90vw + var(--x-offset)) calc(55vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(8vw + var(--x-offset))  calc(20vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(21vw + var(--x-offset)) calc(65vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(34vw + var(--x-offset)) calc(10vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(47vw + var(--x-offset)) calc(75vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(58vw + var(--x-offset)) calc(25vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(72vw + var(--x-offset)) calc(50vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(84vw + var(--x-offset)) calc(40vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(93vw + var(--x-offset)) calc(65vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(6vw + var(--x-offset))  calc(35vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(19vw + var(--x-offset)) calc(55vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(31vw + var(--x-offset)) calc(70vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(44vw + var(--x-offset)) calc(15vh + var(--y-offset)) rgba(255, 255, 255, 0.5),
+    calc(56vw + var(--x-offset)) calc(80vh + var(--y-offset)) rgba(255, 255, 255, 0.7),
+    calc(68vw + var(--x-offset)) calc(60vh + var(--y-offset)) rgba(255, 255, 255, 0.6),
+    calc(81vw + var(--x-offset)) calc(30vh + var(--y-offset)) rgba(255, 255, 255, 0.8),
+    calc(94vw + var(--x-offset)) calc(45vh + var(--y-offset)) rgba(255, 255, 255, 0.5);
   background-repeat: no-repeat;
   z-index: 0;
 }
 
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  flex: 1;
+}
+
+main {
+  flex: 1;
+  z-index: 1;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 
 header, nav, section {
@@ -108,10 +140,9 @@ h1 {
   white-space: nowrap;
   overflow: hidden;
   max-width: 35ch;
-  font-size: 2.5rem; /* 👈 Make this as large as you want */
-  text-shadow: 0 0 10px #33ccff; /* Optional glow */
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px #33ccff;
 }
-
 
 @keyframes typing {
   from { width: 0; }
@@ -126,9 +157,8 @@ h1 {
   margin-left: 2px;
   vertical-align: baseline;
   position: relative;
-  top: -0.7em; /* Adjust up or down */
+  top: -0.7em;
   animation: blink-caret 0.8s steps(1, end) infinite;
-  /* Thin blinking caret */
 }
 
 @keyframes blink-caret {
@@ -139,8 +169,6 @@ h1 {
     opacity: 0;
   }
 }
-
-
 
 .blinking-dash-line {
   width: 100%;
@@ -182,9 +210,10 @@ section {
   margin-top: 20px;
 }
 
+/* Footer + comments layout */
 footer {
-  margin-top: 40px;
-  padding: 20px;
+  margin-top: auto;
+  padding: 1rem;
   background: #000014;
   color: #33aaff;
   font-family: 'Courier New', Courier, monospace;
@@ -192,6 +221,8 @@ footer {
   font-size: 14px;
   box-shadow: inset 0 0 10px #0077ff;
   border-radius: 8px;
+  position: relative;
+  z-index: 1;
 }
 
 .terminal-comments {
@@ -203,7 +234,7 @@ footer {
   box-shadow: 0 0 20px #33ccff77;
   padding: 10px;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -216,7 +247,6 @@ footer {
 }
 
 .terminal-input {
-  flex-grow: 1;
   background: #000011;
   border: 1px solid #33ccff;
   color: #33ccff;
@@ -228,6 +258,7 @@ footer {
   resize: vertical;
   box-shadow: inset 0 0 5px #33ccffaa;
   min-height: 70px;
+  width: 100%;
 }
 
 .terminal-input::placeholder {
@@ -244,8 +275,7 @@ footer {
   padding: 10px 20px;
   border-radius: 4px;
   transition: background 0.3s ease;
-  height: fit-content;
-  align-self: center;
+  align-self: flex-end;
   white-space: nowrap;
 }
 
@@ -269,4 +299,71 @@ footer {
   box-shadow: inset 0 0 8px #33ccff99;
   max-width: 600px;
   margin: 12px auto 0 auto;
+}
+
+.poem-image {
+  max-width: 600px;   /* Limits the image size on large screens */
+  width: 90%;         /* Makes it responsive on smaller screens */
+  height: auto;       /* Keeps aspect ratio */
+  border: 2px solid #33ccff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px #33ccff66;
+  transition: transform 0.3s ease;
+}
+
+.poem-image:hover {
+  transform: scale(1.03);
+}
+
+.ai-poll {
+  margin-top: 12px;
+  background: #001022;
+  border: 2px solid #33ccff;
+  border-radius: 6px;
+  box-shadow: 0 0 10px #33ccff88;
+  padding: 12px;
+  max-width: 600px;
+  color: #33ccff;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+}
+
+.ai-poll label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.poll-options {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.poll-options label {
+  cursor: pointer;
+}
+
+.ai-poll input[type="radio"] {
+  margin-right: 6px;
+  accent-color: #33ccff;
+}
+
+.ai-poll button {
+  background: #33ccff;
+  color: #001022;
+  border: none;
+  padding: 6px 12px;
+  font-weight: 900;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ai-poll button:hover {
+  background: #0099dd;
+}
+
+figure {
+  margin-bottom: 60px;
 }
