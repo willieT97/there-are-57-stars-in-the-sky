@@ -34,7 +34,7 @@
     </div>
   </footer>
 
-    <script>
+   <script>
   fetch('/there-are-57-stars-in-the-sky/posts.json')
     .then(response => response.json())
     .then(posts => {
@@ -42,14 +42,14 @@
       posts.forEach(post => {
         const article = document.createElement('article');
         article.innerHTML = `
-          <h2><a href="${post.filename}">${post.title}</a></h2>
-          <p>${post.summary} <a href="${post.filename}">Read more</a></p>
+          <h2><a href="${post.link}">${post.title}</a></h2>
+          <p>${post.description} <a href="${post.link}">Read more</a></p>
         `;
         container.appendChild(article);
       });
     })
     .catch(error => console.error('Error loading posts:', error));
-    </script>
+</script>
 
 
   <script>
