@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Poetry | Viny</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <header>
+      <h1><span class="typed-text">Turing Test</span></h1>
+      <div class="blinking-dash-line"></div>
+    </header>
+
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="blog.html">Blog</a> |
+      <a href="poetry.html">Poetry</a>
+    </nav>
+
+    <main id="poetry-container">
+      <!-- Poems will be injected here -->
+    </main>
+
+    <footer>
+      <div class="terminal-comments">
+        <textarea
+          class="terminal-input"
+          placeholder="Send a prompt..."
+          rows="3"
+        ></textarea>
+        <button class="terminal-submit" onclick="submitComment()">Submit</button>
+      </div>
+    </footer>
+
+    <script>
+      function submitComment() {
+        const input = document.querySelector('.terminal-input');
+        const output = document.getElementById('comment-output');
+        const comment = input.value.trim();
+
+        if (!comment) {
+          alert('Please enter a comment.');
+          return;
+        }
+
+        const time = new Date().toLocaleTimeString();
+        output.textContent += `[${time}] > ${comment}\n`;
+
+        input.value = '';
+        output.scrollTop = output.scrollHeight;
+      }
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight ? scrollTop / docHeight : 0;
+
+        const maxXOffset = 5;  // max 5px horizontal shift
+        const maxYOffset = 3;  // max 3px vertical shift
+
+        const xOffset = Math.sin(scrollPercent * Math.PI * 2) * maxXOffset;
+        const yOffset = Math.cos(scrollPercent * Math.PI * 2) * maxYOffset;
+
+        document.body.style.setProperty('--x-offset', `${xOffset}px`);
+        document.body.style.setProperty('--y-offset', `${yOffset}px`);
+      });
+
+    </script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Firebase and Logic -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import { getDatabase, ref, push, get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyAH9aIpRjSPF4R_hp1XTmPwdGNLFd5GPSA",
+        authDomain: "web-94b37.firebaseapp.com",
+        databaseURL: "https://web-94b37-default-rtdb.firebaseio.com",
+        projectId: "web-94b37",
+        storageBucket: "web-94b37.appspot.com",
+        messagingSenderId: "193776354389",
+        appId: "1:193776354389:web:c9e96e6864b9b8bf38c0dc"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      const poems = [
+        { id: "poem1", img: "Poetry/poem1.jpg", caption: "Poem #1" },
+        { id: "poem2", img: "Poetry/poem2.jpg", caption: "Poem #2" },
+        { id: "poem3", img: "Poetry/poem3.jpg", caption: "Poem #3" },
+        { id: "poem4", img: "Poetry/poem4.jpg", caption: "Poem #4" },
+        { id: "poem5", img: "Poetry/poem5.jpg", caption: "Poem #5" }
+      ];
+
+      const container = document.getElementById("poetry-container");
+
+      poems.forEach(poem => {
+        container.innerHTML += `
+          <figure>
+            <img src="${poem.img}" alt="${poem.caption}" class="poem-image" />
+            <figcaption class="poem-caption">${poem.caption}</figcaption>
+            <form onsubmit="event.preventDefault(); submitVote('${poem.id}');">
+              <label>Is this AI?</label>
+              <div>
+                <label><input type="radio" name="${poem.id}_vote" value="Yes" required> Yes</label>
+                <label><input type="radio" name="${poem.id}_vote" value="No"> No</label>
+              </div>
+              <button type="submit">Vote</button>
+            </form>
+            <div id="${poem.id}-results" style="margin-top: 10px;"></div>
+            <canvas id="${poem.id}-chart" width="400" height="200"></canvas>
+          </figure>
+        `;
+      });
+
+      window.submitVote = async function(poemId) {
+        const selected = document.querySelector(`input[name=${poemId}_vote]:checked`);
+        if (!selected) return;
+
+        const vote = selected.value;
+        const voteRef = ref(db, `votes/${poemId}`);
+        await push(voteRef, vote);
+        showResults(poemId);
+      };
+
+      async function showResults(poemId) {
+        const voteRef = ref(db, `votes/${poemId}`);
+        const snapshot = await get(voteRef);
+        const voteCounts = { Yes: 0, No: 0 };
+
+        if (snapshot.exists()) {
+          snapshot.forEach(child => {
+            const val = child.val();
+            if (val === "Yes") voteCounts.Yes++;
+            if (val === "No") voteCounts.No++;
+          });
+        }
+
+        const total = voteCounts.Yes + voteCounts.No;
+        const yesPercent = total ? Math.round((voteCounts.Yes / total) * 100) : 0;
+        const noPercent = total ? Math.round((voteCounts.No / total) * 100) : 0;
+
+        document.getElementById(`${poemId}-results`).innerHTML = `
+          <p>Yes: ${yesPercent}%</p>
+          <p>No: ${noPercent}%</p>
+        `;
+
+        renderChart(poemId, yesPercent, noPercent);
+      }
+
+      const charts = {};
+      function renderChart(poemId, yes, no) {
+        const canvas = document.getElementById(`${poemId}-chart`);
+        const ctx = canvas.getContext("2d");
+
+        if (charts[poemId]) charts[poemId].destroy();
+
+        // Gradients
+        const yesGradient = ctx.createLinearGradient(0, 0, 400, 0);
+        yesGradient.addColorStop(0, '#33ff99');
+        yesGradient.addColorStop(1, '#00cc66');
+
+        const noGradient = ctx.createLinearGradient(0, 0, 400, 0);
+        noGradient.addColorStop(0, '#ff6699');
+        noGradient.addColorStop(1, '#cc3366');
+
+        charts[poemId] = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Yes", "No"],
+            datasets: [{
+              data: [yes, no],
+              backgroundColor: [yesGradient, noGradient],
+              borderRadius: 12,
+              barPercentage: 0.6
+            }]
+          },
+          options: {
+            indexAxis: "y",
+            animation: {
+              duration: 800,
+              easing: "easeOutBounce"
+            },
+            scales: {
+              x: {
+                min: 0,
+                max: 100,
+                ticks: {
+                  callback: value => `${value}%`
+                },
+                title: {
+                  display: true,
+                  text: "Percentage"
+                }
+              }
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: ctx => ctx.parsed.x + "%"
+                }
+              }
+            }
+          }
+        });
+      }
+
+      poems.forEach(poem => showResults(poem.id));
+    </script>
+</body>
+</html>
